@@ -10,7 +10,7 @@
 
 cmake_minimum_required(VERSION 3.10.2)
 set(CGA_PROJECT_NAME ClaraGenomicsAnalysis)
-set(CGA_VERSION 0.4.0)
+set(CGA_VERSION 0.5.0)
 project(${CGA_PROJECT_NAME})
 
 # Process options.
@@ -62,6 +62,7 @@ include(cmake/Tests.cmake)
 include(cmake/Benchmarks.cmake)
 include(cmake/Format.cmake)
 include(cmake/Packaging.cmake)
+include(cmake/CondaEnv.cmake)
 
 # Add ClaraGenomicsAnalysis projects.
 add_subdirectory(common/logging)
