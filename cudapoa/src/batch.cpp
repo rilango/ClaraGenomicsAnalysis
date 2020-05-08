@@ -19,7 +19,7 @@ namespace claragenomics
 namespace cudapoa
 {
 
-std::unique_ptr<Batch> create_batch(int32_t device_id,
+std::shared_ptr<Batch> create_batch(int32_t device_id,
                                     cudaStream_t stream,
                                     size_t max_mem,
                                     int8_t output_mask,

@@ -14,6 +14,7 @@ project(cudapoa)
 add_subdirectory(data)
 
 # Project specific NVCC flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -std=c++11")
 message(STATUS "nvcc flags for cudapoa: ${CUDA_NVCC_FLAGS}")
 
@@ -64,3 +65,26 @@ add_subdirectory(samples)
 
 # Add auto formatting.
 cga_enable_auto_formatting("${CMAKE_CURRENT_SOURCE_DIR}")
+
+FIND_PACKAGE(SWIG REQUIRED)
+INCLUDE(${SWIG_USE_FILE})
+
+FIND_PACKAGE(PythonLibs)
+INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/src  
+                    ${CMAKE_CURRENT_SOURCE_DIR}/include
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../common/base/include)
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -fPIC")
+
+SET_PROPERTY(SOURCE binding/cudapoa.i PROPERTY CPLUSPLUS ON)
+        
+SWIG_ADD_LIBRARY(pycudapoa LANGUAGE python SOURCES binding/cudapoa.i)
+SWIG_LINK_LIBRARIES(pycudapoa cudapoa cgabase spdlog ${PYTHON_LIBRARIES})
+
+#find_package(Java REQUIRED)
+#find_package(JNI REQUIRED)
+#include_directories(${JNI_INCLUDE_DIRS})
+#SWIG_ADD_LIBRARY(jcudapoa LANGUAGE java SOURCES binding/cudapoa.i)
+#SWIG_LINK_LIBRARIES(jcudapoa ${PYTHON_LIBRARIES} spdlog cgabase)

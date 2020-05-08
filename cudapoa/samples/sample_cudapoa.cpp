@@ -26,7 +26,7 @@
 using namespace claragenomics;
 using namespace claragenomics::cudapoa;
 
-std::unique_ptr<Batch> initialize_batch(bool msa, bool banded_alignment, const BatchSize& batch_size)
+std::shared_ptr<Batch> initialize_batch(bool msa, bool banded_alignment, const BatchSize& batch_size)
 {
     // Get device information.
     int32_t device_count = 0;
@@ -46,7 +46,7 @@ std::unique_ptr<Batch> initialize_batch(bool msa, bool banded_alignment, const B
     size_t mem_per_batch         = 0.9 * free; // Using 90% of GPU available memory for CUDAPOA batch.
     const int32_t mismatch_score = -6, gap_score = -8, match_score = 8;
 
-    std::unique_ptr<Batch> batch = create_batch(device_id,
+    std::shared_ptr<Batch> batch = create_batch(device_id,
                                                 stream,
                                                 mem_per_batch,
                                                 msa ? OutputType::msa : OutputType::consensus,
@@ -212,7 +212,7 @@ int main(int argc, char** argv)
     }
 
     // Initialize batch.
-    std::unique_ptr<Batch> batch = initialize_batch(msa, banded, batch_size);
+    std::shared_ptr<Batch> batch = initialize_batch(msa, banded, batch_size);
 
     // Loop over all the POA groups, add them to the batch and process them.
     int32_t window_count = 0;

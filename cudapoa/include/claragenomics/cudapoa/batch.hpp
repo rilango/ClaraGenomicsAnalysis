@@ -200,7 +200,7 @@ public:
 /// \param cuda_banded_alignment Whether to use banded alignment
 ///
 /// \return Returns a unique pointer to a new Batch object
-std::unique_ptr<Batch> create_batch(int32_t device_id,
+std::shared_ptr<Batch> create_batch(int32_t device_id,
                                     cudaStream_t stream,
                                     size_t max_mem,
                                     int8_t output_mask,
