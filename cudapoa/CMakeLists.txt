@@ -86,5 +86,6 @@ SWIG_LINK_LIBRARIES(pycudapoa cudapoa cgabase spdlog ${PYTHON_LIBRARIES})
 #find_package(Java REQUIRED)
 #find_package(JNI REQUIRED)
 #include_directories(${JNI_INCLUDE_DIRS})
+
 #SWIG_ADD_LIBRARY(jcudapoa LANGUAGE java SOURCES binding/cudapoa.i)
 #SWIG_LINK_LIBRARIES(jcudapoa ${PYTHON_LIBRARIES} spdlog cgabase)
