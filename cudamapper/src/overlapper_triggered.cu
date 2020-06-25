@@ -164,6 +164,10 @@ struct FilterOverlapOp
         return ((overlap.num_residues_ >= min_residues) &&
         (query_overlap_length >= min_overlap_len) &&
         (target_overlap_length >= min_overlap_len));
+        return ((overlap.num_residues_ >= min_residues) &&
+                (query_overlap_length >= min_overlap_len) &&
+                (target_overlap_length >= min_overlap_len) &&
+                (overlap.query_read_id_ != overlap.target_read_id_);
     }
 };
 
